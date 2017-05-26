@@ -1,0 +1,56 @@
+<div ng-init="UC.session()">
+	<div class="header">
+		<h2 class="header_item inline_block">Full MEAN Wall</h2>
+		<a class="header_item float_right inline_block" href="#" ng-click="UC.logout()">Logout</a>
+		<h3 class="header_item float_right inline_block">Welcome {{ UC.current_user.name }}</h3>
+		<hr>
+	</div>
+	<div class="messages" ng-controller="MessagesController as MC">
+		<form ng-submit="MC.create(MC.newMessage)">
+			<div>
+				<label>Post a message:</label>
+			</div>
+			<div>
+				<textarea ng-model="MC.newMessage.message"></textarea>
+			</div>
+			<div>
+				<input type="submit" value="Post Message">
+			</div>
+		</form>
+		<div>
+			<p class="error" ng-repeat="error in MC.new_message_errors">{{ error }}</p>
+		</div>
+		<div ng-init="MC.index()">
+			<div ng-repeat="message in MC.messages" ng-init="index = $index">
+				<div>
+					<h4 class="inline_block"><a href="#!/users/{{UC.current_user._id}}">{{ message.user.name }}</a> - {{ message.createdAt }}</h4>
+					<p class="inline_block">Likes: {{ message.likes.count }}</p>
+					<button ng-if="message.likes.users.indexOf(UC.current_user._id) == -1" ng-click="MC.updateLikes(message._id, UC.current_user._id)">Like</button>
+					<a href="" ng-if="UC.current_user._id == message.user._id" ng-click="MC.destroy(message._id)">Delete</a>
+					<p>{{ message.message }}</p>
+				</div>
+				<div ng-repeat="comment in message.comments" class="left_indent">
+					<div>
+						<h4 class="inline_block">{{ comment.user.name }} - {{ comment.createdAt }}</h4>
+						<p class="inline_block">Likes: {{ comment.likes.count }}</p>
+						<button ng-if="comment.likes.users.indexOf(UC.current_user._id) == -1" ng-click="MC.updateCommentLikes(comment._id, UC.current_user._id)">Like</button>
+						<a href="" ng-if="UC.current_user._id == comment.user._id" ng-click="MC.destroyComment(comment._id)">Delete</a>
+						<p>{{ comment.comment }}</p>
+					</div>
+				</div>
+				<div class="left_indent">
+					<form ng-submit="MC.createComment(MC.newComment, index, message._id)">
+						<div>
+							<label>Post a Comment:</label>
+						</div>
+						<div>
+							<textarea ng-model="MC.newComment[index].comment"></textarea>
+						</div>
+						<input type="submit" value="Post Comment">
+					</form>
+					<p class="error" ng-repeat="error in MC.new_comment_errors[index]">{{ error }}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,22 @@
+{
+  "name": "belt_review",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "timber <mister.modistette@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/timber-modistette/Coding-Dojo",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-route": "^1.6.4",
+    "angular-cookies": "^1.6.4"
+  }
+}

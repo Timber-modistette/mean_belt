@@ -1,0 +1,43 @@
+<div>
+	<h3>Register</h3>
+	<form ng-submit="UC.create(UC.newUser)">
+		<div>
+			<label>Name</label>
+			<input type="text" ng-model="UC.newUser.name">
+		</div>
+		<div>
+			<label>Email</label>
+			<input type="text" ng-model="UC.newUser.email">
+		</div>
+		<div>
+			<label>Password</label>
+			<input type="password" ng-model="UC.newUser.password">
+		</div>
+		<div>
+		<div>
+			<label>Password Confirmation</label>
+			<input type="password_confirmation" ng-model="UC.newUser.password">
+		</div>
+		<div>
+			<input type="submit" value="Create User">
+		</div>
+	</form>
+	<div>
+		<p class="error" ng-repeat="error in UC.registration_errors">{{ error }}</p>
+	</div>
+</div>
+<div>
+	<h3>Login</h3>
+	<form ng-submit="UC.login(UC.loginUser)">
+		<div>
+			<label>Email</label>
+			<input type="text" ng-model="UC.loginUser.email">
+		</div>
+		<div>
+			<label>Password</label>
+			<input type="password" ng-model="UC.loginUser.password">
+		</div>
+		<input type="submit" value="Login">
+	</form>
+	<p class="error" ng-repeat="error in UC.login_errors">{{ error }}</p>
+</div>
